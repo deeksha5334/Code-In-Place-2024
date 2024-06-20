@@ -88,11 +88,13 @@ def Display_Stocks(stocks):
             "9. matchScore": "1.0000"
         }
         """
-        print(f"Symbol: {stock.get('1. symbol')}")
-        print(f"Name: {stock.get('2. name')}")
-        print(f"Type: {stock.get('3. type')}")
-        print(f"Region: {stock.get('4. region')}")
-        print(f"Currency: {stock.get('8. currency')}")
+
+        #Printing the data by accessing the dictionary keys
+        print("Symbol:", stock.get('1. symbol'))
+        print("Name:", stock.get('2. name'))
+        print("Type:", stock.get('3. type'))
+        print("Region:", stock.get('4. region'))
+        print("Currency:", stock.get('8. currency'))
         print("-" * 80)
 
 
@@ -140,7 +142,7 @@ def Get_Stock_Quote(symbol):
     
     #If data is not found, return empty
     else:
-        print(f"No data found for stock symbol '{symbol}'.")
+        print("No data found for stock symbol", symbol, ".")
         return None
 
 
@@ -177,7 +179,7 @@ def Display_Stock_History(stock_history):
         }"""
     for date, data in stock_history.items():
         #Prints the stock history from the past 100 days formatted like a table
-        print(f"{date}\t{data['1. open']}\t{data['2. high']}\t{data['3. low']}\t{data['4. close']}\t{data['5. volume']}")
+        print(date, "\t", data['1. open'], "\t", data['2. high'], "\t", data['3. low'], "\t", data['4. close'], "\t", data['5. volume'])
 
 #FUNCTION: Converts the currency to the desired
 #Required user input: Amount, From currency, To currency
@@ -204,7 +206,7 @@ def Evaluate_Stock(symbol):
 
     #ERROR HANDLING: If stock history is not found, it will print error message
     if not time_series:
-        print(f"Failed to fetch data for {symbol}.")
+        print("Failed to fetch data for", symbol + ".")
         return
 
     #Get the recent 5 days of closing prices
@@ -213,7 +215,7 @@ def Evaluate_Stock(symbol):
 
     #ERROR HANDLING: If recent days is not found, it will print error message
     if not recent_days:
-        print(f"No recent data available for {symbol}.")
+        print("No recent data available for", symbol + ".")
         return
 
     # Get the closing prices for the last 5 days and converting it to float type
@@ -245,13 +247,13 @@ def Evaluate_Stock(symbol):
     # If the latest close price is more than 5% higher than the average close price for the last 5 days,then the stock is a good investment. Otherwise, it is not a good investment.
     message = ""
     if latest_close > average_close * threshold:
-        message = f"{symbol} looks like a good investment based on recent performance."
+        message = symbol + " looks like a good investment based on recent performance."
     else:
-        message = f"{symbol} might not be a good investment based on recent performance."
+        message = symbol + " might not be a good investment based on recent performance."
 
     # Display evaluation details
-    print(f"This is an evaluation of the stock: {symbol}")
-    print(f"Recent closing prices: {recent_closes}")
+    print("This is an evaluation of the stock:", symbol)
+    print("Recent closing prices:", recent_closes)
     print("Average close price:", round(average_close, 2))
     print("Latest close price:", round(latest_close, 2))
 
@@ -268,7 +270,7 @@ def Recommend_Stocks():
     print("Top 5 Stock Recommendations: ")
     if len(stocks) == len(prices):
         for i in range(len(stocks)):
-            print(f"#{i+1}: {stocks[i]} is a good investment at ${prices[i]} per share.")
+            print("#",i+1, stocks[i], "is a good investment at $", prices[i], "per share.")
     
     #ERROR HANDLING: If stock recommendations are not available, it will print error message
     else:
@@ -330,11 +332,11 @@ def main():
 
                 #Iterating through the dictionary and displaying the stock quote
                 for key, value in stock_quote.items():
-                    print(f"{key}: {value}")
+                    print(key + ":", value)
 
             #ERROR HANDLING: If stock quote is not found, it will print error message
             else:
-                print(f"Failed to retrieve stock quote for '{symbol}'.")
+                print("Failed to retrieve stock quote for", symbol + ".")
 
 
         elif user_choice == '3':
