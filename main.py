@@ -27,7 +27,8 @@ returns the converted amount
 
 7. Evaluate_Stock(symbol): 
 Evaluates the stock based on recent performance, and closing values
-returns evaluation message
+returns evaluation message about whether it is a good idea to invest in that stock 
+(Needs further improvisation for accuracy, this is a basic implementation)
 
 8. Recommend_Stocks(): A Pseudo implementation using currently exisitng recommendations from Yahoo Finance
 9. main(): Runs the main program and displays the menu of options for the user to choose from
@@ -52,17 +53,10 @@ def Search_Stocks(symbol):
     params = {'function': function, 'keywords': symbol, 'apikey': ALPHA_VANTAGE_API_KEY}
     response = requests.get(ALPHA_VANTAGE_BASE_URL, params)
     
-    #If the status code is 200, the data is fetched successfully
-    #This line checks the HTTP status code of the response, the API request would render 
-    if response.status_code == 200:
-        #Returns a list of Dictionaries containing the data fetched from the API
-        return response.json().get('bestMatches', [])
+ 
+    #Returns a list of Dictionaries containing the data fetched from the API
+    return response.json().get('bestMatches', [])
     
-    #ERROR HANDLING
-    else:
-        print(f"Error searching stocks. Status code: {response.status_code}")
-        #Returns an empty list
-        return []
     
 
 #FUNCTION: Displays the results that were fetched from the API
@@ -112,50 +106,44 @@ def Get_Stock_Quote(symbol):
     params = {'function': function, 'symbol': symbol, 'apikey': ALPHA_VANTAGE_API_KEY}
     response = requests.get(ALPHA_VANTAGE_BASE_URL, params)
     
-    #If the status code is 200, the data is fetched successfully
-    #This line checks the HTTP status code of the response, the API request would render 
-    if response.status_code == 200:
-        data = response.json().get('Global Quote')
+    #Fetches 
+    data = response.json().get('Global Quote')
 
-        #Accessing the datapoints through dictionary indexing
-        """
-        EXAMPLE FORMAT of data fetched from the API endpoint in .json format: 
-        "Global Quote": {
-        "01. symbol": "IBM",
-        "02. open": "170.0000",
-        "03. high": "170.7500",
-        "04. low": "168.3800",
-        "05. price": "170.5500",
-        "06. volume": "3386442",
-        "07. latest trading day": "2024-06-18",
-        "08. previous close": "169.5000",
-        "09. change": "1.0500",
-        "10. change percent": "0.6195%"
+    #Accessing the datapoints through dictionary indexing
+    """
+    EXAMPLE FORMAT of data fetched from the API endpoint in .json format: 
+    "Global Quote": {
+    "01. symbol": "IBM",
+    "02. open": "170.0000",
+    "03. high": "170.7500",
+    "04. low": "168.3800",
+    "05. price": "170.5500",
+    "06. volume": "3386442",
+    "07. latest trading day": "2024-06-18",
+    "08. previous close": "169.5000",
+    "09. change": "1.0500",
+    "10. change percent": "0.6195%"
+    }
+    """
+    if data:
+        return {
+            'Symbol': data.get('01. symbol'),
+            'Open': data.get('02. open'),
+            'High': data.get('03. high'),
+            'Low': data.get('04. low'),
+            'Price': data.get('05. price'),
+            'Volume': data.get('06. volume'),
+            'Latest Trading Day': data.get('07. latest trading day'),
+            'Previous Close': data.get('08. previous close'),
+            'Change': data.get('09. change'),
+            'Change Percent': data.get('10. change percent'),
         }
-        """
-        if data:
-            return {
-                'Symbol': data.get('01. symbol'),
-                'Open': data.get('02. open'),
-                'High': data.get('03. high'),
-                'Low': data.get('04. low'),
-                'Price': data.get('05. price'),
-                'Volume': data.get('06. volume'),
-                'Latest Trading Day': data.get('07. latest trading day'),
-                'Previous Close': data.get('08. previous close'),
-                'Change': data.get('09. change'),
-                'Change Percent': data.get('10. change percent'),
-            }
-        
-        #If data is not found, return empty
-        else:
-            print(f"No data found for stock symbol '{symbol}'.")
-            return None
-        
-    #ERROR HANDLING: If data could not be accessed, print the status code of the error
+    
+    #If data is not found, return empty
     else:
-        print(f"Error retrieving stock quote. Status code: {response.status_code}")
+        print(f"No data found for stock symbol '{symbol}'.")
         return None
+
 
 
 #FUNCTION: Gets everyday "as-traded" data for a stock
@@ -165,16 +153,10 @@ def Get_Stock_History(symbol):
     #Parameters to be passed to the API endpoint
     params = {'function': function, 'symbol': symbol, 'apikey': ALPHA_VANTAGE_API_KEY}
     response = requests.get(ALPHA_VANTAGE_BASE_URL, params)
+
+    #Returns a dictionary containing the data fetched from the API
+    return response.json().get('Time Series (Daily)', {})
     
-    #If the status code is 200, the data is fetched successfully
-    #This line checks the HTTP status code of the response, the API request would render 
-    if response.status_code == 200:
-        return response.json().get('Time Series (Daily)', {})
-    
-    #ERROR HANDLING: Returns the status code of the error (fetched from the API) and returns an empty dictionary
-    else:
-        print(f"Error retrieving stock history. Status code: {response.status_code}")
-        return {}
 
 #FUNCTION: Displays the stock history that is retrieved from the API
 def Display_Stock_History(stock_history):
@@ -204,21 +186,13 @@ def Currency_Conversion(amount, from_currency, to_currency):
     #Base URL used for conversion using the ExchangeRate API
     url = f'https://v6.exchangerate-api.com/v6/{EXCHANGE_RATE_API_KEY}/pair/{from_currency}/{to_currency}'
     response = requests.get(url)
-
-    #If the status code is 200, the data is fetched successfully
-    #This line checks the HTTP status code of the response, the API request would render 
-    if response.status_code == 200:
-        #Fetches the current exchange rate from the API
-        rate = response.json().get('conversion_rate', 1)
-        print("Current Exchange rate:", rate)
-
-        #Returns the converted amount based on the exchange rate
-        return amount * rate
     
-    #ERROR HANDLING: If data could not be accessed, print the status code of the error
-    else:
-        print("Error fetching data from ExchangeRate API")
-        return amount
+    #Fetches the current exchange rate from the API
+    rate = response.json().get('conversion_rate', 1)
+    print("Current Exchange rate:", rate)
+
+    #Returns the converted amount based on the exchange rate
+    return amount * rate
     
 
 #FUNCTION: Evaluates the stock based on recent performance
@@ -361,7 +335,6 @@ def main():
             #ERROR HANDLING: If stock quote is not found, it will print error message
             else:
                 print(f"Failed to retrieve stock quote for '{symbol}'.")
-
 
 
         elif user_choice == '3':
