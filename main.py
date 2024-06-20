@@ -53,7 +53,6 @@ def Search_Stocks(symbol):
     params = {'function': function, 'keywords': symbol, 'apikey': ALPHA_VANTAGE_API_KEY}
     response = requests.get(ALPHA_VANTAGE_BASE_URL, params)
     
- 
     #Returns a list of Dictionaries containing the data fetched from the API
     return response.json().get('bestMatches', [])
     
@@ -106,7 +105,7 @@ def Get_Stock_Quote(symbol):
     params = {'function': function, 'symbol': symbol, 'apikey': ALPHA_VANTAGE_API_KEY}
     response = requests.get(ALPHA_VANTAGE_BASE_URL, params)
     
-    #Fetches 
+    #Fetches the data from the API endpoint in .json format and stores in the variable "data"
     data = response.json().get('Global Quote')
 
     #Accessing the datapoints through dictionary indexing
@@ -164,7 +163,7 @@ def Display_Stock_History(stock_history):
         print("No historical data found.")
         return
     
-    #Prints the stock history from the past 100 days formatted like a table
+    #Prints the header for the tabular format
     print("Date\t\t\tOpen\t\tHigh\t\tLow\t\tClose\t\tVolume")
 
     #Accessing the items of the dictionary corresponding to the keys 
@@ -177,6 +176,7 @@ def Display_Stock_History(stock_history):
             "5. volume": "4290453"
         }"""
     for date, data in stock_history.items():
+        #Prints the stock history from the past 100 days formatted like a table
         print(f"{date}\t{data['1. open']}\t{data['2. high']}\t{data['3. low']}\t{data['4. close']}\t{data['5. volume']}")
 
 #FUNCTION: Converts the currency to the desired
@@ -252,8 +252,8 @@ def Evaluate_Stock(symbol):
     # Display evaluation details
     print(f"This is an evaluation of the stock: {symbol}")
     print(f"Recent closing prices: {recent_closes}")
-    print(f"Average close price: {average_close:.2f}")
-    print(f"Latest close price: {latest_close:.2f}")
+    print("Average close price:", round(average_close, 2))
+    print("Latest close price:", round(latest_close, 2))
 
     return message
 
