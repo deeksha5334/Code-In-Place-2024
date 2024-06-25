@@ -69,23 +69,29 @@ Recommends the list of Top 5 stock recommendations to trade in.
 Implements a menu for the user to choose from.
 
 Applications
+
 This program would also serve as an educational tool to the users who are beginning to acquaint themselves with the stock market. By getting real-time data and detailed stock quotes, they can understand how trends are being influenced by exchange rates, fluctuations, supply and demand.
 Investors would be able to track the stocks they are interested in and analyze the daily trends. It helps them make investing decisions. Users can also track their personal finances and observe the trends of their favourite stocks. It helps learners understand and evaluate the behavior of the stock market by studying the characteristics of stock data.
 Currency conversion was implemented for the users’ convenience, so that they can convert the currencies of the stocks into their local currencies. Moreover, with the exchange rates it gives an idea about how these rates have been impacting the value of investments in different currencies. With currency conversion, an investor in the US for instance, can invest in stocks from the European Trade market by following the suitable conversion.
 
 Scope for improvement Accuracy in Analysis
+
 My program does not yet provide accurate recommendations to the user. This is a basic implementation which evaluates the latest close and average close of the stock and determines the result. The range over which the results are based of is limited. However there is a huge scope for improvement in terms of analysis and evaluation of stocks. The program can use deeper data analyzing tools available in Python.
 
 Visualizing the data
+
 The program can be improvised to plot the trends the stock market is undergoing real-time, by using python libraries like Matplotlib and Plotly. We can add elements of visual representation to the program so that it is more accurate when studying the behavior of the stock market. There is always room for implementing more APIs to enhance the functionality.
 
 Implementation of top recommendations
+
 In the program, I have implemented just a sample function for “Top 5 Stock recommendations” (Data temporarily fetched from Yahoo Finance). However this function would be useful for the user to make choices based on real-time stock trends that are fetched from the API. Several elements like “relative strength index (RSI)”, averages and closing quotes can be used to draw the concussion.
 
 Error Handling
+
 We can implement a more advanced error handling mechanism which would give the return codes while fetching data from the API so that the user can identify where the access is being denied. Error handling is needed to support technical difficulties, when the API limits requests and when the data encounters an issue.
 
 REFERENCES
+
 Exchange Rate API
 [https://www.exchangerate-api.com](https://www.exchangerate-api.com)
 
