@@ -2,26 +2,35 @@
 Stock Market Analyzer using APIs
 
 Stanford Code In Place 2024 – Final Project Python
+
 (Documentation)
+
 STOCK MARKET ANALYSER
+
 This program was an introductory attempt to inculcate use of APIs to develop more robust applications. I have made use of two APIs - Alpha Vantage API (Stock Market Data) and ExchangeRate API (Exchange Rates for various currencies). I have implemented basic API endpoints to extract real-time stock market data. Accessing the data (in form of dictionaries) from the json file and implementing them into the program, making HTTPS requests to the API and implementing API endpoints are some of the methods involved.
 Understanding the stock market is not as difficult as it seems to be. This program serves as a Stock market Analyser which helps users evaluate the rapidly changing behavior of the stock market and helps them make better investing decisions.
 The program is menu driven and displays a numbered list of options for the user to choose from. If the user enters an invalid choice, the program asks for input again. This takes place until the user enters a correct choice. The user can search for stocks, get stock quotes, get stock history, evaluate a stock, print global stock status, convert currency, and get top stock recommendations based on the choices.
 
+
 Alpha Vantage Endpoints used
 1. QUOTE ENDPOINT
+   
    Function: GLOBAL QUOTE
    https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=dem o
 
-2. SEARCHENDPOINT
+3. SEARCHENDPOINT
+   
    Function: SYMBOL_SEARCH
    https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=SAIC&apikey= demo
 
-3. TIME SERIES DATA
+5. TIME SERIES DATA
+   
    Function: TIME SERIES DAILY
    https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey= demo
 
+
 Functionality of the program
+
 • Search_Stocks(symbol)
 function = 'SYMBOL_SEARCH'
 This function was implemented to search for a stock based on the symbol provided by the user. It is useful for identification of stocks of various companies.
@@ -68,11 +77,13 @@ Recommends the list of Top 5 stock recommendations to trade in.
 • The main() function
 Implements a menu for the user to choose from.
 
+
 Applications
 
 This program would also serve as an educational tool to the users who are beginning to acquaint themselves with the stock market. By getting real-time data and detailed stock quotes, they can understand how trends are being influenced by exchange rates, fluctuations, supply and demand.
 Investors would be able to track the stocks they are interested in and analyze the daily trends. It helps them make investing decisions. Users can also track their personal finances and observe the trends of their favourite stocks. It helps learners understand and evaluate the behavior of the stock market by studying the characteristics of stock data.
 Currency conversion was implemented for the users’ convenience, so that they can convert the currencies of the stocks into their local currencies. Moreover, with the exchange rates it gives an idea about how these rates have been impacting the value of investments in different currencies. With currency conversion, an investor in the US for instance, can invest in stocks from the European Trade market by following the suitable conversion.
+
 
 Scope for improvement Accuracy in Analysis
 
@@ -89,6 +100,7 @@ In the program, I have implemented just a sample function for “Top 5 Stock rec
 Error Handling
 
 We can implement a more advanced error handling mechanism which would give the return codes while fetching data from the API so that the user can identify where the access is being denied. Error handling is needed to support technical difficulties, when the API limits requests and when the data encounters an issue.
+
 
 REFERENCES
 
