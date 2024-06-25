@@ -10,16 +10,16 @@ The program is menu driven and displays a numbered list of options for the user 
 
 Alpha Vantage Endpoints used
 1. QUOTE ENDPOINT
-Function: GLOBAL QUOTE
-https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=dem o
+   Function: GLOBAL QUOTE
+   https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=dem o
 
 2. SEARCHENDPOINT
-Function: SYMBOL_SEARCH
-https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=SAIC&apikey= demo
+   Function: SYMBOL_SEARCH
+   https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=SAIC&apikey= demo
 
 3. TIME SERIES DATA
-Function: TIME SERIES DAILY
-https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey= demo
+   Function: TIME SERIES DAILY
+   https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey= demo
 
 Functionality of the program
 • Search_Stocks(symbol)
