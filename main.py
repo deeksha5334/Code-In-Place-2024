@@ -40,8 +40,8 @@ import requests
 
 #Base URL and API keys
 ALPHA_VANTAGE_BASE_URL = 'https://www.alphavantage.co/query'
-ALPHA_VANTAGE_API_KEY = 'W0JP1VNQYSBPZFX4' 
-EXCHANGE_RATE_API_KEY = '66bbe3895a8ece0cb430aca9'
+ALPHA_VANTAGE_API_KEY = 'Your-AlphaVantageAPI-Key' 
+EXCHANGE_RATE_API_KEY = 'Your-ExchangeRateAPI-Key'
 
 #FUNCTION: Fetches the details of the stock based on the symbol
 #Required user input: Stock symbol
